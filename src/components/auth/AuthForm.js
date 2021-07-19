@@ -27,18 +27,15 @@ const AuthForm = ({ handleSubmit, fieldNames }) => {
     console.log(formValues);
   };
 
-  const createFields = () => {
-    return map(fieldNames, (fieldName) => {
-      return (
-        <Field
-          name={fieldName}
-          component={renderInput}
-          label={fieldName}
-          key={fieldName}
-        />
-      );
-    });
-  };
+  const createFields = () =>
+    map(fieldNames, (fieldName) => (
+      <Field
+        name={fieldName}
+        component={renderInput}
+        label={fieldName}
+        key={fieldName}
+      />
+    ));
 
   return (
     <div>
