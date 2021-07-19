@@ -1,6 +1,6 @@
 import Landing from "./components/Landing";
-import Login from "./components/Login";
-import Signup from "./components/Signup";
+import Login from "./components/auth/Login";
+import Signup from "./components/auth/Signup";
 import Dashnoard from "./components/Dashboard";
 import NotFound from "./components/NotFound";
 
