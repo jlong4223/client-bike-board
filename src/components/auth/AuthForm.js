@@ -1,7 +1,7 @@
 import { Field, reduxForm } from "redux-form";
 import map from "lodash/map";
 
-const AuthForm = ({ handleSubmit, fieldNames }) => {
+const AuthForm = ({ handleSubmit, fieldNames, onSubmitForm }) => {
   const renderErr = ({ error, touched }) => {
     if (touched && error) {
       console.log(error);
@@ -24,7 +24,7 @@ const AuthForm = ({ handleSubmit, fieldNames }) => {
   };
 
   const onSubmit = (formValues) => {
-    console.log(formValues);
+    onSubmitForm(formValues);
   };
 
   const createFields = () =>
@@ -49,12 +49,10 @@ const AuthForm = ({ handleSubmit, fieldNames }) => {
 
 const validate = (formValues) => {
   const errors = {};
-  if (!formValues["First Name"]) {
-    errors["First Name"] = "Please enter your first name";
+  if (!formValues.Name) {
+    errors.Name = "Please enter your name";
   }
-  if (!formValues["Last Name"]) {
-    errors["Last Name"] = "Please enter your last name";
-  }
+
   if (!formValues.Email) {
     errors.Email = "Please enter an email";
   }
