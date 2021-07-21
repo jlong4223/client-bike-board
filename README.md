@@ -7,3 +7,4 @@
 - Axios
 - Ruby on Rails API
 - JWT & local storage
+- React Native Web
