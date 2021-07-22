@@ -3,6 +3,7 @@ import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
 import Dashboard from "./components/Dashboard";
 import NotFound from "./components/NotFound";
+import Profile from "./components/profile/Profile";
 
 function getRoutes() {
   return [
@@ -29,6 +30,12 @@ function getRoutes() {
       path: "/dashboard",
       exact: true,
       component: Dashboard,
+    },
+    {
+      id: "Profile",
+      path: "/profile/:name",
+      exact: true,
+      component: Profile,
     },
     {
       id: "NotFound",
