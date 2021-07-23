@@ -1,6 +1,8 @@
 import history from "../../utils/history";
-import { REGISTER, LOGIN, LOGOUT } from "./types";
+import railsApi from "../../services/rails-url";
+import { REGISTER, LOGIN, LOGOUT, GET_DETAILS, UPDATE_DETAILS } from "./types";
 import { addUser, loginUser } from "../../services/auth-rails-api";
+import { getDetails } from "../../services/user-details-rails";
 import {
   setToken,
   removeToken,
@@ -58,5 +60,34 @@ export const logout = () => {
   removeToken();
   return {
     type: LOGOUT,
+  };
+};
+
+export const getUserDetails = (userId) => {
+  return async (dispatch) => {
+    const response = await getDetails(userId);
+
+    console.log("user details res: ", response);
+    if (response.status === 200) {
+      dispatch({
+        type: GET_DETAILS,
+        payload: response.data.details[0],
+      });
+    }
+  };
+};
+
+export const editUserDetails = (detailId, formValues) => {
+  return async (dispatch) => {
+    // I dont think I can patch the details from the users route, somehow need to get the details id accosiated with the user
+    console.log("formValues in patch", formValues);
+    const response = await railsApi.patch(`/details/${detailId}`, formValues);
+    console.log("patch res: ", response);
+    if (response.status === 200) {
+      dispatch({
+        type: UPDATE_DETAILS,
+        payload: response.data,
+      });
+    }
   };
 };
