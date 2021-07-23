@@ -5,7 +5,7 @@ function setToken(token) {
 }
 
 function removeToken() {
-  localStorage.removeItem("token");
+  localStorage.removeItem("rails_token");
 }
 
 function getToken(res) {
