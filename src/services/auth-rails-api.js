@@ -1,11 +1,9 @@
-import axios from "axios";
-
-const baseURL = "http://localhost:3000";
+import railsApi from "./rails-url";
 
 export function addUser(user) {
-  return axios.post(baseURL + "/users", { user });
+  return railsApi.post("/users", { user });
 }
 
 export function loginUser(user) {
-  return axios.post(baseURL + "/users/login", user);
+  return railsApi.post("/users/login", user);
 }
