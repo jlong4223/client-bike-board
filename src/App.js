@@ -1,24 +1,35 @@
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
 
 import routes from "./routes";
 import Header from "./components/Header";
 
-function App() {
+function App({ authenticated }) {
   return (
     <>
       <Header />
       <Switch>
-        {routes.map((route) => (
-          <Route
-            key={route.id}
-            path={route.path}
-            exact={route.exact}
-            component={route.component}
-          />
-        ))}
+        {routes.map((route) =>
+          !authenticated && route.isProtected === true ? (
+            <Redirect to="/" />
+          ) : (
+            <Route
+              key={route.id}
+              path={route.path}
+              exact={route.exact}
+              component={route.component}
+            />
+          )
+        )}
       </Switch>
     </>
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    authenticated: state.userInfo.isSignedIn,
+  };
+};
+
+export default connect(mapStateToProps)(App);
