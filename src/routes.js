@@ -30,12 +30,14 @@ function getRoutes() {
       path: "/dashboard",
       exact: true,
       component: Dashboard,
+      isProtected: true,
     },
     {
       id: "Profile",
       path: "/profile/:name",
       exact: true,
       component: Profile,
+      isProtected: true,
     },
     {
       id: "NotFound",
