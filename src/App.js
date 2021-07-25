@@ -11,7 +11,7 @@ function App({ authenticated }) {
       <Switch>
         {routes.map((route) =>
           !authenticated && route.isProtected === true ? (
-            <Redirect to="/" />
+            <Redirect to="/" key={route.isProtected} />
           ) : (
             <Route
               key={route.id}
