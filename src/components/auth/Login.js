@@ -1,11 +1,10 @@
 import { connect } from "react-redux";
-import { getUserFromDB } from "../../redux/actions";
-
 import AuthForm from "./AuthForm";
 
-const Login = ({ getUserFromDB }) => {
-  const fieldNames = ["Email", "Password"];
+import { getUserFromDB } from "../../redux/actions";
+import { loginFields } from "./AuthFields";
 
+const Login = ({ getUserFromDB }) => {
   const onSubmitForm = (values) => {
     getUserFromDB(values);
   };
@@ -13,7 +12,7 @@ const Login = ({ getUserFromDB }) => {
   return (
     <div>
       <h1>Login</h1>
-      <AuthForm fieldNames={fieldNames} onSubmitForm={onSubmitForm} />
+      <AuthForm fieldNames={loginFields} onSubmitForm={onSubmitForm} />
     </div>
   );
 };

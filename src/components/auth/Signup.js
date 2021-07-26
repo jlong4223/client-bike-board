@@ -2,10 +2,9 @@ import { connect } from "react-redux";
 import AuthForm from "./AuthForm";
 
 import { registerUser } from "../../redux/actions/";
+import { registerFields } from "./AuthFields";
 
 const Signup = ({ registerUser }) => {
-  const fieldNames = ["Name", "Email", "Password"];
-
   const onSubmitForm = (values) => {
     registerUser(values);
   };
@@ -13,7 +12,7 @@ const Signup = ({ registerUser }) => {
   return (
     <div>
       <h1>Signup</h1>
-      <AuthForm fieldNames={fieldNames} onSubmitForm={onSubmitForm} />
+      <AuthForm fieldNames={registerFields} onSubmitForm={onSubmitForm} />
     </div>
   );
 };
