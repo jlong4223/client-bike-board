@@ -9,13 +9,25 @@ const Header = ({ userInfo, logout }) => {
 
   return (
     <header style={styles.header}>
-      <h1>Client BikeBoard</h1>
+      <Link to="/" style={styles.headerLink}>
+        BikeBoard
+      </Link>
       {isSignedIn ? (
         <div style={styles.authLinks}>
-          <p>Hi, {userInfo.user.name}</p>
-          <Link to="" onClick={() => logout()}>
+          <Link to="" onClick={() => logout()} style={styles.normalLink}>
             Logout
           </Link>
+          <Link to="/dashboard" style={styles.normalLink}>
+            Dashboard
+          </Link>
+          <Link to={`/profile/${userInfo.user.name}`} style={styles.normalLink}>
+            Hi, {userInfo.user.name}
+          </Link>
+          <img
+            style={styles.image}
+            src="https://avatars.githubusercontent.com/u/71945780?v=4"
+            alt="profileImg"
+          />
         </div>
       ) : (
         <div style={styles.authLinks}>
@@ -40,12 +52,30 @@ const headerStyles = () => {
     header: {
       display: "flex",
       justifyContent: "space-around",
+      borderBottom: "1px solid #ccc",
+    },
+    headerLink: {
+      textDecoration: "none",
+      color: "#333",
+      fontWeight: "bold",
+      fontSize: "40px",
+      margin: "10px",
+    },
+    normalLink: {
+      textDecoration: "none",
+      color: "#333",
+      fontWeight: "bold",
     },
     authLinks: {
       display: "flex",
       justifyContent: "space-around",
       alignItems: "center",
-      width: "10%",
+      width: "30%",
+    },
+    image: {
+      width: "50px",
+      height: "50px",
+      borderRadius: "50%",
     },
   };
 };
