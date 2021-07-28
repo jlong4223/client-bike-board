@@ -1,7 +1,6 @@
 import history from "../../utils/history";
 import { REGISTER, LOGIN, LOGOUT } from "./types";
 import { addUser, loginUser } from "../../services/auth-rails-api";
-import { getDetails } from "../../services/user-details-rails";
 import {
   setToken,
   removeToken,
@@ -28,15 +27,12 @@ export const getUserFromDB = (formValues) => {
     const response = await loginUser({ ...formValues });
     response.data.auth_token && setToken(response.data.auth_token);
 
-    const userDetails = await getDetails(getEntireUserFromToken().user_id);
-
     if (response.status === 200) {
       dispatch({
         type: LOGIN,
         payload: {
           auth_token: response.data.auth_token,
           ...getEntireUserFromToken(),
-          ...userDetails.data.details[0],
         },
       });
 
