@@ -1,4 +1,4 @@
 import { registerUser, getUserFromDB, logout } from "./auth";
-import { editUserDetails } from "./details";
+import { editUserDetails, getDetails } from "./details";
 
-export { registerUser, getUserFromDB, logout, editUserDetails };
+export { registerUser, getUserFromDB, logout, editUserDetails, getDetails };
