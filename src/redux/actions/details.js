@@ -1,5 +1,21 @@
 import railsApi from "../../services/rails-url";
-import { UPDATE_DETAILS } from "./types";
+import { UPDATE_USER_DETAILS } from "./types";
+import { getDetailsById } from "../../services/user-details-rails";
+
+export const getDetails = (detailsId) => {
+  return async (dispatch) => {
+    const response = await getDetailsById(detailsId);
+
+    console.log("get details res: ", response);
+    // TODO omit the response.data.user stuff here
+    if (response.status === 200) {
+      dispatch({
+        type: UPDATE_USER_DETAILS,
+        payload: response.data,
+      });
+    }
+  };
+};
 
 // TODO move the patch func to services and import
 export const editUserDetails = (detailId, formValues) => {
@@ -10,7 +26,7 @@ export const editUserDetails = (detailId, formValues) => {
     console.log("patch res: ", response);
     if (response.status === 200) {
       dispatch({
-        type: UPDATE_DETAILS,
+        type: UPDATE_USER_DETAILS,
         payload: response.data,
       });
     }
