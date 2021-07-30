@@ -41,4 +41,11 @@ export const fields = [
     placeholder: "Enter your current bike",
     required: true,
   },
+  {
+    name: "zip_code",
+    type: "text",
+    label: "Enter your Zip Code",
+    placeholder: "Enter your zip code",
+    required: true,
+  },
 ];
