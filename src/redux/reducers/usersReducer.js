@@ -24,7 +24,7 @@ export default function usersReducer(state = initialState, action) {
     case UPDATE_PIC:
       return { ...state, pics: action.payload };
     case LOGOUT:
-      return { ...state, isSignedIn: false, user: {}, details: {} };
+      return { ...state, isSignedIn: false, user: {}, details: {}, pics: {} };
     default:
       return state;
   }
