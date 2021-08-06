@@ -39,6 +39,13 @@ function getRoutes() {
       component: Profile,
       isProtected: true,
     },
+    // {
+    //   id: "UserPic",
+    //   path: '/profile/:name/:picid',
+    //   exact: true,
+    //   component: ProfilePics,
+    //   isProtected: true,
+    // },
     {
       id: "NotFound",
       path: "*",
