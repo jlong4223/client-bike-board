@@ -1,13 +1,12 @@
 import railsApi from "../../services/rails-url";
 import { UPDATE_USER_DETAILS } from "./types";
-import { getDetailsById } from "../../services/user-details-rails";
+import { getDetailsById } from "../../services/user-details";
 
 export const getDetails = (detailsId) => {
   return async (dispatch) => {
     const response = await getDetailsById(detailsId);
 
     console.log("get details res: ", response);
-    // TODO omit the response.data.user stuff here
     if (response.status === 200) {
       dispatch({
         type: UPDATE_USER_DETAILS,
