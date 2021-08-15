@@ -5,6 +5,7 @@ import { createStore, applyMiddleware } from "redux";
 import reduxThunk from "redux-thunk";
 import reducers from "../redux/reducers";
 
+// TODO figure out how to persist the url
 const persistConfig = {
   key: "auth",
   storage,
