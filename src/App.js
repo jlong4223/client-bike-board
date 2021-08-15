@@ -1,5 +1,6 @@
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
+import { setLocation } from "./redux/actions";
 
 import routes from "./routes";
 import Header from "./components/Header";
@@ -32,4 +33,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, { setLocation })(App);
