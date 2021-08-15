@@ -1,5 +1,7 @@
 # Bike Board
 
+This app serves as a place for people to share/post about their bike related activities.
+
 ## Tech Used:
 
 - React.js
@@ -13,3 +15,10 @@
 - Base Web
 - Lodash
 - Redux Persist
+
+## Future Features:
+
+- change language
+- change theme
+- ui improvements
+- search by location
