@@ -1,8 +1,15 @@
 import { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { editUserDetails, getDetails } from "../../redux/actions";
+import {
+  editUserDetails,
+  getDetails,
+  updatePic,
+  getUsersPics,
+} from "../../redux/actions";
+import map from "lodash/map";
 
 import DetailsForm from "./DetailsForm";
+import PicsForm from "./PicsForm";
 
 const Profile = ({
   userName,
@@ -10,59 +17,103 @@ const Profile = ({
   editUserDetails,
   userInfo,
   user_details,
+  pics,
   getDetails,
+  updatePic,
+  getUsersPics,
 }) => {
   const [editState, setIsEditState] = useState(false);
+  const [picState, setPicState] = useState();
 
   useEffect(() => {
     getDetails(detailsId);
-  }, [getDetails, detailsId]);
+    getUsersPics(userInfo.user_id);
+  }, [getDetails, detailsId, getUsersPics, userInfo.user_id]);
 
   const postForm = async (formValues) => {
-    console.log("formValues: ", formValues);
-    // userDetails !== undefined than do the edit else create new
     await editUserDetails(detailsId, formValues);
     setIsEditState(false);
   };
+
+  async function postPicture(e) {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("userID", userInfo.user_id);
+    formData.append("application", "client-bikeboard");
+    formData.append("image", picState);
+
+    try {
+      updatePic(formData);
+      setPicState(undefined);
+      e.target.reset();
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async function handleChange(e) {
+    setPicState(e.target.files[0]);
+  }
 
   const openEditForm = () => {
     setIsEditState(!editState);
   };
 
-  //   if there no user details, then show do a post instead of patch
   return (
     <div>
-      <h1>Profile Page</h1>
-      <p>Hi, {userName}</p>
-      <p>Your email: {userInfo.email}</p>
-      <p>Here is your address: {user_details.address}</p>
-      <p>Change your profile Pic</p>
-      <p>Your bike count: {user_details.bike_count}</p>
-      <p>Add a description</p>
-      <button onClick={() => openEditForm()}>Edit your Details</button>
-      {editState && (
-        <DetailsForm
-          detailsId={detailsId}
-          postForm={postForm}
-          initialValues={user_details}
+      <div>
+        <div>
+          <h1>Hi, {userName}</h1>
+          <p>Here is your address: {user_details.address}</p>
+          <p>Your bike count: {user_details.bike_count}</p>
+          <p>Your Bio: {user_details.bio}</p>
+          <p>Your Phone Number: {user_details.phone_number}</p>
+          <p>Your zip code: {user_details.zip_code}</p>
+        </div>
+      </div>
+      <div>
+        <p>Your pictures:</p>
+        <div>
+          {map(pics, (pic) => {
+            return (
+              <img src={pic.image} alt="user_pic" key={pic._id} height="100" />
+            );
+          })}
+        </div>
+        <PicsForm
+          handleChange={handleChange}
+          postPicture={postPicture}
+          picState={picState}
         />
-      )}
-      {/* TODO add another form for posting new details */}
+        <button onClick={() => openEditForm()}>Edit your Details</button>
+        {/* TODO fix the edit to take the place of the details when opened */}
+        {editState && (
+          <DetailsForm
+            detailsId={detailsId}
+            postForm={postForm}
+            initialValues={user_details}
+          />
+        )}
+        {/* TODO add another form for posting new details */}
+      </div>
     </div>
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   return {
-    userName: state.userInfo.user.name,
+    userName: ownProps.match.params.name,
     user_id: state.userInfo.user.user_id,
     userInfo: state.userInfo.user,
     detailsId: state.userInfo.user.details_id,
     user_details: state.userInfo.details,
+    pics: state.userInfo.pics,
   };
 };
 
 export default connect(mapStateToProps, {
   editUserDetails,
   getDetails,
+  updatePic,
+  getUsersPics,
 })(Profile);
