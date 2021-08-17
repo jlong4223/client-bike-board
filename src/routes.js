@@ -4,6 +4,7 @@ import Signup from "./components/auth/Signup";
 import Dashboard from "./components/Dashboard";
 import NotFound from "./components/NotFound";
 import Profile from "./components/profile/Profile";
+import OnePic from "./components/profile/OnePic";
 
 function getRoutes() {
   return [
@@ -39,13 +40,13 @@ function getRoutes() {
       component: Profile,
       isProtected: true,
     },
-    // {
-    //   id: "UserPic",
-    //   path: '/profile/:name/:picid',
-    //   exact: true,
-    //   component: ProfilePics,
-    //   isProtected: true,
-    // },
+    {
+      id: "OnePic",
+      path: "/profile/:name/:picid",
+      exact: true,
+      component: OnePic,
+      isProtected: true,
+    },
     {
       id: "NotFound",
       path: "*",
