@@ -4,6 +4,7 @@ import {
   LOGOUT,
   UPDATE_USER_DETAILS,
   UPDATE_PIC,
+  UPDATE_PROFILE_PIC,
 } from "../actions/types";
 
 const initialState = {
@@ -23,6 +24,8 @@ export default function usersReducer(state = initialState, action) {
       return { ...state, details: action.payload };
     case UPDATE_PIC:
       return { ...state, pics: action.payload };
+    case UPDATE_PROFILE_PIC:
+      return state;
     case LOGOUT:
       return { ...state, isSignedIn: false, user: {}, details: {}, pics: {} };
     default:

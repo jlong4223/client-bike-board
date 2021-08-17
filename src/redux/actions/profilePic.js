@@ -1,5 +1,5 @@
 import { getUserPic, postNewPic } from "../../services/user-details";
-import { UPDATE_PIC } from "./types";
+import { UPDATE_PIC, UPDATE_PROFILE_PIC } from "./types";
 
 export const updatePic = (pic) => {
   console.log("update pic", pic);
@@ -27,5 +27,13 @@ export const getUsersPics = (userID) => {
       type: UPDATE_PIC,
       payload: response.data[0].picture,
     });
+  };
+};
+
+export const setProfilePic = (pic) => {
+  console.log("set profile pic", pic);
+  return {
+    type: UPDATE_PROFILE_PIC,
+    payload: pic,
   };
 };
