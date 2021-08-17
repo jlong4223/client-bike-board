@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import {
   editUserDetails,
@@ -24,6 +25,8 @@ const Profile = ({
 }) => {
   const [editState, setIsEditState] = useState(false);
   const [picState, setPicState] = useState();
+
+  const styles = getStyles();
 
   useEffect(() => {
     getDetails(detailsId);
@@ -60,41 +63,54 @@ const Profile = ({
   };
 
   return (
-    <div>
-      <div>
+    <div style={styles.container}>
+      <div style={styles.profileContainer}>
         <div>
-          <h1>Hi, {userName}</h1>
-          <p>Here is your address: {user_details.address}</p>
-          <p>Your bike count: {user_details.bike_count}</p>
-          <p>Your Bio: {user_details.bio}</p>
-          <p>Your Phone Number: {user_details.phone_number}</p>
-          <p>Your zip code: {user_details.zip_code}</p>
+          {editState ? (
+            <>
+              <DetailsForm
+                detailsId={detailsId}
+                postForm={postForm}
+                initialValues={user_details}
+              />
+              <button onClick={() => openEditForm()}>Cancel</button>
+            </>
+          ) : (
+            <>
+              <h1>Hi, {userName}</h1>
+              <p>Here is your address: {user_details.address}</p>
+              <p>Your bike count: {user_details.bike_count}</p>
+              <p>Your Bio: {user_details.bio}</p>
+              <p>Your Phone Number: {user_details.phone_number}</p>
+              <p>Your zip code: {user_details.zip_code}</p>
+              <button onClick={() => openEditForm()}>Edit your Details</button>
+            </>
+          )}
+          {/* TODO add another form for posting new details */}
         </div>
       </div>
-      <div>
-        <p>Your pictures:</p>
-        <div>
+      <div style={styles.picsContainer}>
+        <div style={styles.picsDiv}>
+          <p>Your pictures:</p>
+          <PicsForm
+            handleChange={handleChange}
+            postPicture={postPicture}
+            picState={picState}
+          />
           {map(pics, (pic) => {
             return (
-              <img src={pic.image} alt="user_pic" key={pic._id} height="100" />
+              <Link to={`/profile/${userName}/${pic._id}`}>
+                <img
+                  style={styles.image}
+                  src={pic.image}
+                  alt="user_pic"
+                  key={pic._id}
+                  height="100"
+                />
+              </Link>
             );
-          })}
+          }).reverse()}
         </div>
-        <PicsForm
-          handleChange={handleChange}
-          postPicture={postPicture}
-          picState={picState}
-        />
-        <button onClick={() => openEditForm()}>Edit your Details</button>
-        {/* TODO fix the edit to take the place of the details when opened */}
-        {editState && (
-          <DetailsForm
-            detailsId={detailsId}
-            postForm={postForm}
-            initialValues={user_details}
-          />
-        )}
-        {/* TODO add another form for posting new details */}
       </div>
     </div>
   );
@@ -117,3 +133,31 @@ export default connect(mapStateToProps, {
   updatePic,
   getUsersPics,
 })(Profile);
+
+function getStyles() {
+  return {
+    container: {
+      display: "flex",
+      border: "1px solid #ccc",
+    },
+    profileContainer: {
+      width: "60%",
+      margin: "10px",
+      // border: "1px solid #000",
+    },
+    picsContainer: {
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-between",
+      alignItems: "center",
+      width: "40%",
+      // border: "1px solid red",
+    },
+    picsDiv: {
+      // height: "60vh",
+    },
+    image: {
+      margin: "3px",
+    },
+  };
+}
