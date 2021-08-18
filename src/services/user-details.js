@@ -21,3 +21,11 @@ export const getUserPic = async (userId) => {
 export const postNewPic = async (pic) => {
   return await cloudinaryApi.post("/allapps/", pic);
 };
+
+export const patchUserPic = async (userId, pic, bool) => {
+  console.log("bool", bool);
+  return await cloudinaryApi.patch(
+    `/allapps/client-bikeboard/${userId}/${pic}`,
+    bool
+  );
+};
