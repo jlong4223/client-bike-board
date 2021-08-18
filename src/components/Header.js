@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../redux/actions";
 
-const Header = ({ userInfo, logout }) => {
+const Header = ({ userInfo, logout, profilePic }) => {
   const styles = headerStyles();
 
   const isSignedIn = userInfo.isSignedIn;
@@ -23,11 +23,7 @@ const Header = ({ userInfo, logout }) => {
           <Link to={`/profile/${userInfo.user.name}`} style={styles.normalLink}>
             Hi, {userInfo.user.name}
           </Link>
-          <img
-            style={styles.image}
-            src="https://avatars.githubusercontent.com/u/71945780?v=4"
-            alt="profileImg"
-          />
+          <img style={styles.image} src={profilePic} alt="profileImg" />
         </div>
       ) : (
         <div style={styles.authLinks}>
@@ -40,8 +36,13 @@ const Header = ({ userInfo, logout }) => {
 };
 
 const mapStateToProps = (state) => {
+  const getProfilePic = state.userInfo.pics.filter(
+    (pic) => pic.isProfilePic === true
+  )[0].image;
+
   return {
     userInfo: state.userInfo,
+    profilePic: getProfilePic,
   };
 };
 
