@@ -1,6 +1,13 @@
 import { connect } from "react-redux";
+import { setProfilePic } from "../../redux/actions/profilePic";
 
-const OnePic = ({ picture }) => {
+const OnePic = ({ picture, setProfilePic, userId }) => {
+  function setNewProfilePic(picture) {
+    console.log(picture);
+    // TODO figure out how to set all others to false
+    return setProfilePic(userId, picture, { isProfilePic: true });
+  }
+
   return (
     <div
       style={{
@@ -11,7 +18,9 @@ const OnePic = ({ picture }) => {
     >
       <h1>Pic Clicked</h1>
       <img src={picture.image} alt="clicked" width="400" />
-      <button>Set as profile Picture</button>
+      <button onClick={() => setNewProfilePic(picture._id)}>
+        Set as profile Picture
+      </button>
       <button>Delete</button>
     </div>
   );
@@ -24,7 +33,8 @@ const mapStateToProps = (state, ownProps) => {
 
   return {
     picture: matchedPic[0],
+    userId: state.userInfo.user.user_id,
   };
 };
 
-export default connect(mapStateToProps)(OnePic);
+export default connect(mapStateToProps, { setProfilePic })(OnePic);
