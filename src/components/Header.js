@@ -23,6 +23,7 @@ const Header = ({ userInfo, logout, profilePic }) => {
           <Link to={`/profile/${userInfo.user.name}`} style={styles.normalLink}>
             Hi, {userInfo.user.name}
           </Link>
+          {/* TODO idea- onclick brings up the images, and it first sets the image clicked to false and then changes the image that the user selects as an image */}
           <img style={styles.image} src={profilePic} alt="profileImg" />
         </div>
       ) : (
@@ -36,9 +37,10 @@ const Header = ({ userInfo, logout, profilePic }) => {
 };
 
 const mapStateToProps = (state) => {
-  const getProfilePic = state.userInfo.pics.filter(
-    (pic) => pic.isProfilePic === true
-  )[0].image;
+  const getProfilePic =
+    state.userInfo.pics.length > 0
+      ? state.userInfo.pics.filter((pic) => pic.isProfilePic === true)[0].image
+      : "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png";
 
   return {
     userInfo: state.userInfo,
