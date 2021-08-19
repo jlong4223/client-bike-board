@@ -27,6 +27,7 @@ const Profile = ({
   const [picState, setPicState] = useState();
 
   const styles = getStyles();
+  const mappedPics = mapUserPics(pics, styles, userName);
 
   useEffect(() => {
     getDetails(detailsId);
@@ -97,19 +98,7 @@ const Profile = ({
             postPicture={postPicture}
             picState={picState}
           />
-          {map(pics, (pic) => {
-            return (
-              <Link to={`/profile/${userName}/${pic._id}`}>
-                <img
-                  style={styles.image}
-                  src={pic.image}
-                  alt="user_pic"
-                  key={pic._id}
-                  height="100"
-                />
-              </Link>
-            );
-          }).reverse()}
+          {mappedPics}
         </div>
       </div>
     </div>
@@ -160,4 +149,18 @@ function getStyles() {
       margin: "3px",
     },
   };
+}
+
+function mapUserPics(pics, styles, userName) {
+  return map(pics, (pic, i) => (
+    <Link key={i} to={`/profile/${userName}/${pic._id}`}>
+      <img
+        style={styles.image}
+        src={pic.image}
+        alt="user_pic"
+        key={pic._id}
+        height="100"
+      />
+    </Link>
+  ));
 }
