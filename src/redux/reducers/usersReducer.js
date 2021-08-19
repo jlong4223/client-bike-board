@@ -11,7 +11,7 @@ const initialState = {
   user: {},
   details: {},
   isSignedIn: false,
-  pics: {},
+  pics: [],
 };
 
 export default function usersReducer(state = initialState, action) {
@@ -25,7 +25,8 @@ export default function usersReducer(state = initialState, action) {
     case UPDATE_PIC:
       return { ...state, pics: action.payload };
     case UPDATE_PROFILE_PIC:
-      return state;
+      // TODO figure out what I want to do with profile pic and how I want to update state
+      return { ...state };
     case LOGOUT:
       return { ...state, isSignedIn: false, user: {}, details: {}, pics: {} };
     default:
