@@ -25,6 +25,7 @@ export const registerUser = (formValues) => {
 export const getUserFromDB = (formValues) => {
   return async (dispatch) => {
     const response = await loginUser({ ...formValues });
+    // TODO get the response from the server and check if the user is valid so I can throw an error if not
     response.data.auth_token && setToken(response.data.auth_token);
 
     if (response.status === 200) {
