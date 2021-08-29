@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout, getUsersPics } from "../redux/actions";
+import { getProfilePic } from "./shared/profilePic";
 
 const Header = ({ userInfo, logout, profilePic, getUsersPics }) => {
   const isSignedIn = userInfo.isSignedIn;
@@ -42,14 +43,11 @@ const Header = ({ userInfo, logout, profilePic, getUsersPics }) => {
 };
 
 const mapStateToProps = (state) => {
-  const getProfilePic =
-    state.userInfo.pics.length > 0
-      ? state.userInfo.pics.filter((pic) => pic.isProfilePic === true)[0].image
-      : "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png";
+  const getUserPic = getProfilePic(state);
 
   return {
     userInfo: state.userInfo,
-    profilePic: getProfilePic,
+    profilePic: getUserPic.image,
   };
 };
 
