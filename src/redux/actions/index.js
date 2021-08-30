@@ -1,6 +1,6 @@
 import { registerUser, getUserFromDB, logout } from "./auth";
 import { editUserDetails, getDetails } from "./details";
-import { updatePic, getUsersPics } from "./profilePic";
+import { updatePic, getUsersPics, setProfilePic } from "./profilePic";
 import { setLocation } from "./location";
 
 export {
@@ -12,4 +12,5 @@ export {
   updatePic,
   getUsersPics,
   setLocation,
+  setProfilePic,
 };
