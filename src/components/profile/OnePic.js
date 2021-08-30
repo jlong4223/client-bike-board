@@ -1,11 +1,16 @@
 import { connect } from "react-redux";
-import { setProfilePic } from "../../redux/actions/profilePic";
+import { setProfilePic } from "../../redux/actions";
+import { getProfilePic } from "../shared/profilePic";
 
-const OnePic = ({ picture, setProfilePic, userId }) => {
+const OnePic = ({ picture, setProfilePic, userId, currentProfilePic }) => {
   function setNewProfilePic(picture) {
-    console.log(picture);
-    // TODO figure out how to set all others to false
-    return setProfilePic(userId, picture, { isProfilePic: true });
+    return removeCurrentProfilePic(currentProfilePic._id).then(() => {
+      setProfilePic(userId, picture, { isProfilePic: true });
+    });
+  }
+
+  function removeCurrentProfilePic(picture) {
+    return setProfilePic(userId, picture, { isProfilePic: false });
   }
 
   return (
@@ -31,9 +36,12 @@ const mapStateToProps = (state, ownProps) => {
     (pic) => pic._id === ownProps.match.params.picid
   );
 
+  const profilePic = getProfilePic(state);
+
   return {
     picture: matchedPic[0],
     userId: state.userInfo.user.user_id,
+    currentProfilePic: profilePic,
   };
 };
 
