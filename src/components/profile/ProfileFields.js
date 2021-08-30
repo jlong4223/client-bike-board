@@ -5,6 +5,7 @@ export const fields = [
     label: "Enter your Address",
     placeholder: "Enter your address",
     required: true,
+    error: "Please enter your address",
   },
   {
     name: "bio",
@@ -12,6 +13,7 @@ export const fields = [
     label: "Enter your Bio",
     placeholder: "Enter your bio",
     required: true,
+    error: "Please enter your bio",
   },
   {
     name: "biker_type",
@@ -19,6 +21,7 @@ export const fields = [
     label: "What kind of biker are you?",
     placeholder: "What kind of biker are you?",
     required: true,
+    error: "Please enter your biker type",
   },
   {
     name: "bike_count",
@@ -26,6 +29,7 @@ export const fields = [
     label: "How many bikes do you own?",
     placeholder: "How many bikes do you own?",
     required: true,
+    error: "Please enter your bike count",
   },
   {
     name: "phone",
@@ -33,6 +37,7 @@ export const fields = [
     label: "Enter your phone number",
     placeholder: "Enter your phone number",
     required: true,
+    error: "Please enter your phone number",
   },
   {
     name: "current_bike",
@@ -40,6 +45,7 @@ export const fields = [
     label: "Enter your current bike",
     placeholder: "Enter your current bike",
     required: true,
+    error: "Please enter your current bike",
   },
   {
     name: "zip_code",
@@ -47,5 +53,14 @@ export const fields = [
     label: "Enter your Zip Code",
     placeholder: "Enter your zip code",
     required: true,
+    error: "Please enter your zip code",
+  },
+  {
+    name: "fav_trail",
+    type: "text",
+    label: "Enter your favorite trail",
+    placeholder: "Enter your favorite trail",
+    required: true,
+    error: "Please enter your favorite trail",
   },
 ];
