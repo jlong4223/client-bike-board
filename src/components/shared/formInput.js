@@ -8,8 +8,16 @@ export const renderErr = ({ error, touched }) => {
   }
 };
 
-export const renderInput = ({ input, placeholder, label, meta, type }) => {
-  // console.log("meta: ", meta);
+export const renderInput = ({
+  input,
+  placeholder,
+  label,
+  meta,
+  type,
+  error,
+}) => {
+  meta.error = meta.error ? meta.error : error;
+
   return (
     <div>
       <label>{label}</label>
