@@ -15,6 +15,7 @@ This app serves as a place for people to share/post about their bike related act
 - Base Web
 - Lodash
 - Redux Persist
+- Redux Thunk
 
 ## Future Features:
 
