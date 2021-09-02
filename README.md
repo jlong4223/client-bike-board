@@ -12,7 +12,7 @@ This app serves as a place for people to share/post about their bike related act
 - Node.js API & MongoDB
 - JWT & local storage
 - React Native Web
-- Base Web
+- Base Web UI
 - Lodash
 - Redux Persist
 - Redux Thunk
