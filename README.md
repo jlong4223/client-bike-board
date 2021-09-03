@@ -6,6 +6,7 @@ This app serves as a place for people to share/post about their bike related act
 
 - React.js
 - Redux
+- React Router
 - React-Redux
 - Axios
 - Ruby on Rails API w/PostgreSQL
